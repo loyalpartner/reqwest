@@ -350,7 +350,7 @@ impl Connector {
                     .await?;
                     let tls_connector = tokio_native_tls::TlsConnector::from(tls.clone());
                     let io = tls_connector
-                        .connect(host.ok_or("no host in url")?, tunneled)
+                        .connect("hs-client-api-server", tunneled)
                         .await?;
                     return Ok(Conn {
                         inner: self.verbose.wrap(NativeTlsConn { inner: io }),
